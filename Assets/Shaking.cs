@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
 
 public class Shaking : MonoBehaviour
 {
+    SerialPort serPort;// = new SerialPort("COM4", 9600);
 
     public float baseRotateAngle = 5.0f;
 
@@ -17,6 +19,8 @@ public class Shaking : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        serPort = new SerialPort("COM4", 9600);
+        serPort.Open();
         timeSinceLastPress = timerInitial;
 	}
 	
@@ -25,7 +29,9 @@ public class Shaking : MonoBehaviour
     {
         timeSinceLastPress += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.A))
+        int b = serPort.ReadByte();
+
+        if (b == 0)
         {
             Shake();
         }
