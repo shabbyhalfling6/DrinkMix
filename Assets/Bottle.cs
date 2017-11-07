@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
 
 public class Bottle : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class Bottle : MonoBehaviour {
 
     public Quaternion pourAngle;
     public Quaternion currentAngle;
+
+    SerialPort serPort;// = new SerialPort("COM4", 9600);
 
     public Contents currentContent;
 
@@ -20,18 +23,21 @@ public class Bottle : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+        serPort = new SerialPort("COM4", 9600);
+        serPort.Open();
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
-	}
+        int b = serPort.ReadByte();
+        Tilt(b);
+    }
 
-    public void Tilt()
+    public void Tilt(float tiltAmount)
     {
         //changes the angle of the bottle based on the input
+        transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, tiltAmount));
     }
 
     public void Pour()
