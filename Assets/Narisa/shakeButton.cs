@@ -23,7 +23,7 @@ public class shakeButton : MonoBehaviour
        
         Vector3 clampedPosition = transform.position;            //initial vector value = player pos
         
-        clampedPosition.y = Mathf.Clamp(transform.position.y, -20f, 20f);  //y value clamps
+        clampedPosition.y = Mathf.Clamp(transform.position.y, -15f, 15f);  //y value clamps
       
         transform.position = clampedPosition;   //object position clamped between set values
 
