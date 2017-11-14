@@ -219,7 +219,9 @@ Prefab:
       propertyPath: m_Name
       value: Bottle1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &264325170
@@ -289,7 +291,9 @@ Prefab:
       propertyPath: m_Name
       value: Bottle3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &312859167
@@ -447,7 +451,7 @@ GameObject:
   - component: {fileID: 649816802}
   m_Layer: 0
   m_Name: AnimControl
-  m_TagString: Untagged
+  m_TagString: AnimationController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,7 +474,7 @@ MonoBehaviour:
   Bottle5: {fileID: 935847483}
   Bottle6: {fileID: 694389781}
   Shaker: {fileID: 1438385022}
-  Glass: {fileID: 0}
+  Glass: {fileID: 1134173557}
 --- !u!4 &649816803
 Transform:
   m_ObjectHideFlags: 0
@@ -527,7 +531,9 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &694389780 stripped
@@ -667,7 +673,9 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &935847482 stripped
@@ -759,7 +767,9 @@ Prefab:
       propertyPath: m_Name
       value: Bottle2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1063896003
@@ -1106,7 +1116,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134173552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.16, z: 97.6}
+  m_LocalPosition: {x: -144, y: -12.16, z: 97.6}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1196,7 +1206,9 @@ Prefab:
       propertyPath: m_Name
       value: Bottle5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1285564267
@@ -1563,6 +1575,48 @@ Prefab:
       propertyPath: m_Name
       value: Bottle4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54144375315943390, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
+    - {fileID: 54456898186442432, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b952a6a424b8a574ca7fea03abbc5d39, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2002681948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2002681949}
+  - component: {fileID: 2002681950}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2002681949
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002681948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.899299, y: 7.0766726, z: -4.7458344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002681950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002681948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f100c69ea7e14540a42afb61af9ad4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
