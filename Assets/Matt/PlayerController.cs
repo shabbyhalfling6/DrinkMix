@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gameplay : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	AnimationController animCont;
 	int bottle1Stage;
@@ -12,6 +12,8 @@ public class Gameplay : MonoBehaviour {
 	int bottle5Stage;
 	int bottle6Stage;
 	int shakerStage;
+
+	public int reset;
 
 	// Use this for initialization
 	void Start () {
@@ -215,10 +217,17 @@ public class Gameplay : MonoBehaviour {
 	}
 
 	void Glass(){
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
-			animCont.Glass.SetBool ("Playing", true);
-		} else if (Input.GetKeyDown (KeyCode.RightShift)) {
+		if (Input.GetKeyDown (KeyCode.LeftShift) && reset >= 1) {
 			animCont.Glass.SetBool ("Playing", false);
+			animCont.Glass.SetBool ("Reset", true); 
+			reset = 0;
+		}else if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			animCont.Glass.SetBool ("Playing", true);
+			animCont.Glass.SetBool ("Reset", false);
+			reset++;
+		}else if (Input.GetKeyDown (KeyCode.RightShift)) {
+			animCont.Glass.SetBool ("Playing", false);
+			reset = 0;
 		}
 	}
 }
