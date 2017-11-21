@@ -25,7 +25,7 @@ public class RecipeController : MonoBehaviour {
 	void SetIngredients(){
 		//Add the change the floats into percentages
 		DrinkRecipes Martini = new DrinkRecipes ();
-		Martini.DryVemouth = 0.5;
+		Martini.DryVemouth = 0.5f;
 		Martini.Gin = 3;
 		RecipeList [1] = Martini;
 		DrinkRecipes Margarita = new DrinkRecipes ();
@@ -34,14 +34,14 @@ public class RecipeController : MonoBehaviour {
 		Margarita.LimeJuice = 1;
 		RecipeList [2] = Martini;
 		DrinkRecipes Mojito = new DrinkRecipes ();
-		Mojito.WhiteRum = 1.5;
+		Mojito.WhiteRum = 1.5f;
 		Mojito.LimeJuice = 1;
 		Mojito.SodaWater = 5;
 		RecipeList [3] = Martini;
 		DrinkRecipes OldFashioned = new DrinkRecipes ();
-		OldFashioned.Bourbon = 1.5;
-		OldFashioned.AngosturaBitters = 0.5;
-		OldFashioned.Water = 0.5;
+		OldFashioned.Bourbon = 1.5f;
+		OldFashioned.AngosturaBitters = 0.5f;
+		OldFashioned.Water = 0.5f;
 		RecipeList [4] = Martini;
 	}
 }
@@ -56,3 +56,4 @@ Psuedo
  - The name of the drink and the required ingredients are then listed on the in-game sheet
  - The LED's are then updated to match the colour codes that were previously given to the ingredients
  - When an ingredient is poured, said ingredient is then ticked off the list
+ */

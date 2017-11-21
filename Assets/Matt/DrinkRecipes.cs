@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrinkRecipes : MonoBehaviour {
-
+public class DrinkRecipes : MonoBehaviour
+{
 	public float DryVemouth = 0;
 	public float Gin = 0;
 	public float Tequila = 0;
@@ -24,16 +24,4 @@ public class DrinkRecipes : MonoBehaviour {
 	public float CranberryJuice = 0;
 	public float GommeSyrup = 0;
 	public float Cola = 0;
-
-
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
