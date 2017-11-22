@@ -61,6 +61,7 @@ public class Bottle : MonoBehaviour
         //divide that amount by 0.02 so it's a per frame amount
         scaledPourAmount = scaledPourAmount * 0.02f;
 
+        //test
         Debug.Log(scaledPourAmount);
     }
 }

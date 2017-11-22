@@ -2,42 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    public enum Mixers
-    {
-        DryVemouth = 0,
-        Gin,
-        Tequila,
-        Cointreau,
-        WhiteRum,
-        Bourbon,
-        AngosturaBitters,
-        VodkaCitron,
-        TripleSec,
-        Vodka,
-        LemonJuice,
-        LimeJuice,
-        SimpleSyrup,
-        SodaWater,
-        Water,
-        PineappleJuice,
-        CoconutCream,
-        CranberryJuice,
-        GommeSyrup,
-        Cola,
-
-        MixersNum
-    };
-
 public class GameManager : MonoBehaviour
 {
     //the list of bottles in the game
     public Bottle[] bottles = new Bottle[6];
-    public DrinkRecipes[] recipes = new DrinkRecipes[(int)Mixers.MixersNum];
+    public DrinkRecipes[] recipes = new DrinkRecipes[12];
 
     public DrinkRecipes currentRecipe;
 
+    private static GameManager instance;
+
+    public static GameManager Instance()
+    {
+        if (instance == null)
+        {
+            Debug.Log("There is no game manager in the scene!");
+            return null;
+        }
+        else
+        {
+            return instance;
+        }
+    }
+
 	void Start ()
     {
+        instance = this;
+
         //initialises all the bottles in the scene
         bottles = FindObjectsOfType(typeof(Bottle)) as Bottle[];
 	}
@@ -45,25 +36,26 @@ public class GameManager : MonoBehaviour
     void SetNewRecipe()
     {
         //Set a new recipe from the list of recipes in the recipe controller
-        currentRecipe = recipes[Random.Range(0, recipes.Length)];
+        int randNum = Random.Range(0, recipes.Length);
+        currentRecipe = recipes[randNum];
     }
 
-    void SetMixers(Mixers[] mixers)
+    void SetBottleContents()
     {
-        for (int i = 0; i < mixers.Length; i++)
+        for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
-            //Loop over bottles to check if the mixer is already set to a bottle
-            for (int j = 0; j < bottles.Length; j++)
+            for (int j = 0;  j < bottles.Length; j++)
             {
-                if (mixers[i] == bottles[j].currentContent)
-                {
-                    break;
-                }
-                else if(j == bottles.Length)
-                {
-                    bottles[i].currentContent = mixers[i];
-                }
+                bottles[j].currentContent.mixerName = "";
             }
+
+            int k = 0;
+
+            do
+            {
+                k = Random.Range(0, bottles.Length);
+            } while (bottles[k].currentContent.mixerName != "");
+            bottles[k].currentContent = currentRecipe.ingredients[i];
         }
     }
 }

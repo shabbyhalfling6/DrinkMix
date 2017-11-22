@@ -6,16 +6,11 @@ using System.IO.Ports;
 public class Shaker : Bottle
 {
     public float baseRotateAngle = 5.0f;
-
-	void Start ()
-    {
-
-	}
 	
-	void Update ()
+	void FixedUpdate ()
     {   
         // Keyboard input
-        if(Input.GetButtonDown("A"))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             Shake();
         }
