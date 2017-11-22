@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //the list of bottles in the game
-    public Bottle[] bottles = new Bottle[6];
-    public DrinkRecipes[] recipes = new DrinkRecipes[12];
+    public Bottle[] bottles;
+    public DrinkRecipes[] recipes;
+    public Mixers[] mixers;
 
     public DrinkRecipes currentRecipe;
 
@@ -25,7 +26,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	void Start ()
+    private void Awake()
+    {
+        instance = this;    
+    }
+
+    void Start ()
     {
         instance = this;
 

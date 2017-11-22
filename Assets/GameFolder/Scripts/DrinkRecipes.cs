@@ -9,9 +9,9 @@ public struct Mixers
     public float amountRequired;
 }
 
-public class DrinkRecipes : MonoBehaviour
+public class DrinkRecipes
 {
-    public string RecipeName = "No Name";
-    
-    public Mixers[] ingredients = new Mixers[16];
+    public string recipeName = "No Name";
+
+    public Mixers[] ingredients;
 }
