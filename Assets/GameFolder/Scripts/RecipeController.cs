@@ -27,6 +27,8 @@ public class RecipeController : MonoBehaviour {
         {
             ReadInRecipeInfo(lines[i], i);
         }
+
+        GameManager.Instance().SetNewRecipe();
     }
 
     void ReadInMixerNames(string nameLine)

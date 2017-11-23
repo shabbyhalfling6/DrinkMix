@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Mixers[] mixers;
 
     public DrinkRecipes currentRecipe;
+
+    public Text ingredientsText;
+    public Text recipeNameText;
 
     private static GameManager instance;
 
@@ -39,29 +43,39 @@ public class GameManager : MonoBehaviour
         bottles = FindObjectsOfType(typeof(Bottle)) as Bottle[];
 	}
 
-    void SetNewRecipe()
+    public void SetNewRecipe()
     {
         //Set a new recipe from the list of recipes in the recipe controller
         int randNum = Random.Range(0, recipes.Length);
         currentRecipe = recipes[randNum];
-    }
 
-    void SetBottleContents()
-    {
+        recipeNameText.text = currentRecipe.recipeName;
+
+        ingredientsText.text = "";
+
         for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
-            for (int j = 0;  j < bottles.Length; j++)
-            {
-                bottles[j].currentContent.mixerName = "";
-            }
+            //SetBottleContents(i);
 
-            int k = 0;
-
-            do
-            {
-                k = Random.Range(0, bottles.Length);
-            } while (bottles[k].currentContent.mixerName != "");
-            bottles[k].currentContent = currentRecipe.ingredients[i];
+            if(currentRecipe.ingredients[i].amountRequired != 0)
+                ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
         }
+    }
+
+    void SetBottleContents(int index)
+    {
+
+        for (int j = 0;  j < bottles.Length; j++)
+        {
+            bottles[j].currentContent.mixerName = "";
+        }
+
+        int k = 0;
+
+        do
+        {
+            k = Random.Range(0, bottles.Length);
+        } while (bottles[k].currentContent.mixerName != "");
+        bottles[k].currentContent = currentRecipe.ingredients[index];
     }
 }
