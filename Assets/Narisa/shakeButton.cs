@@ -21,20 +21,20 @@ public class shakeButton : MonoBehaviour
         float shake = Input.GetAxis("Vertical") * Time.deltaTime * speed;
         transform.Translate(0f, shake, 0f);
        
-        Vector3 clampedPosition = transform.position;            //initial vector value = player pos
+   //     Vector3 clampedPosition = transform.position;            //initial vector value = player pos
         
-        clampedPosition.y = Mathf.Clamp(transform.position.y, -15f, 15f);  //y value clamps
+    //    clampedPosition.y = Mathf.Clamp(transform.position.y, -15f, 15f);  //y value clamps
       
-        transform.position = clampedPosition;   //object position clamped between set values
+   //     transform.position = clampedPosition;   //object position clamped between set values
 
 
 
 
-        //float translation = Input.GetAxis("Vertical") * speed;
+        float translation = Input.GetAxis("Vertical") * speed;
 
-        // translation *= Time.time;
+         translation *= Time.time;
 
-        //transform.Translate(0, translation, 0 );
+        transform.Translate(0, translation, 0 );
 
     }
 }
