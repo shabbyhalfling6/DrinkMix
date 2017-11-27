@@ -6,7 +6,6 @@ using System.IO.Ports;
 public class Bottle : MonoBehaviour
 {
     public bool pouring = false;
-    public bool pickedUp = false;
 
     public float minPourAngle = 70.0f;
     public float maxPourAngle = 160.0f;
@@ -16,13 +15,10 @@ public class Bottle : MonoBehaviour
     public float minPourAmount = 0.0f;
     public float maxPourAmount = 1.0f;
 
-    public float currentPourAmount = 0.0f;
-
     public Mixers currentContent;
 	
 	void FixedUpdate ()
     {
-        //Keyboard Inputs
         if (Input.GetKey("1"))
         {
             Tilt(5.0f);
@@ -32,7 +28,7 @@ public class Bottle : MonoBehaviour
             Tilt(-5.0f);
         }
 
-        //Test if currently pouring
+        //Test if the bottle is tilted enough to be pouring
         if (currentAngle >= minPourAngle)
         {
             Pour();
@@ -61,7 +57,6 @@ public class Bottle : MonoBehaviour
         //divide that amount by 0.02 so it's a per frame amount
         scaledPourAmount = scaledPourAmount * 0.02f;
 
-        //test
-        Debug.Log(scaledPourAmount);
+        currentContent.amountRequired += scaledPourAmount;
     }
 }

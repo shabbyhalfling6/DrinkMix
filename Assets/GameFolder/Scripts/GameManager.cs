@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     public DrinkRecipes[] recipes;
     public Mixers[] mixers;
 
+    //the current recipe displayed
     public DrinkRecipes currentRecipe;
 
     public Text ingredientsText;
     public Text recipeNameText;
+
+    private ScoreManager score;
 
     private static GameManager instance;
 
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour
 
     public void SetNewRecipe()
     {
+        GetScore();
+
         //Set a new recipe from the list of recipes in the recipe controller
         int randNum = Random.Range(0, recipes.Length);
         currentRecipe = recipes[randNum];
@@ -55,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
-            //SetBottleContents(i);
+            SetBottleContents(i);
 
             if(currentRecipe.ingredients[i].amountRequired != 0)
                 ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
@@ -64,12 +69,6 @@ public class GameManager : MonoBehaviour
 
     void SetBottleContents(int index)
     {
-
-        for (int j = 0;  j < bottles.Length; j++)
-        {
-            bottles[j].currentContent.mixerName = "";
-        }
-
         int k = 0;
 
         do
@@ -77,5 +76,21 @@ public class GameManager : MonoBehaviour
             k = Random.Range(0, bottles.Length);
         } while (bottles[k].currentContent.mixerName != "");
         bottles[k].currentContent = currentRecipe.ingredients[index];
+    }
+
+    //this reads in the content of the bottles that have been poured and resets them and gets the score
+    void GetScore()
+    {
+        //the recipe that was mixed by the player
+        DrinkRecipes mixedRecipes = new DrinkRecipes();
+        mixedRecipes.recipeName = "DrinkMix";
+
+        for (int i = 0; i < bottles.Length; i++)
+        {
+            mixedRecipes.ingredients[i] = bottles[i].currentContent;
+            bottles[i].currentContent = new Mixers();
+        }
+
+        score.SetRecipes(mixedRecipes, currentRecipe);
     }
 }
