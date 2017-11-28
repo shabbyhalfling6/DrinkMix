@@ -44,12 +44,11 @@ public class GameManager : MonoBehaviour
 
         //initialises all the bottles in the scene
         bottles = FindObjectsOfType(typeof(Bottle)) as Bottle[];
+        score = GameObject.Find("GameManager").GetComponent<ScoreManager>();
 	}
 
     public void SetNewRecipe()
     {
-        GetScore();
-
         //Set a new recipe from the list of recipes in the recipe controller
         int randNum = Random.Range(0, recipes.Length);
         currentRecipe = recipes[randNum];
@@ -65,10 +64,17 @@ public class GameManager : MonoBehaviour
             if(currentRecipe.ingredients[i].amountRequired != 0)
                 ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
         }
+
+        GetScore();
     }
 
     void SetBottleContents(int index)
     {
+        for(int i = 0; i < bottles.Length; i++)
+        {
+            bottles[i].currentContent.mixerName = "";
+        }
+
         int k = 0;
 
         do
@@ -83,12 +89,12 @@ public class GameManager : MonoBehaviour
     {
         //the recipe that was mixed by the player
         DrinkRecipes mixedRecipes = new DrinkRecipes();
+        mixedRecipes.ingredients = new Mixers[bottles.Length];
         mixedRecipes.recipeName = "DrinkMix";
 
         for (int i = 0; i < bottles.Length; i++)
         {
             mixedRecipes.ingredients[i] = bottles[i].currentContent;
-            bottles[i].currentContent = new Mixers();
         }
 
         score.SetRecipes(mixedRecipes, currentRecipe);
