@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
+using System.Threading;
+using System;
 
 public class Bottle : MonoBehaviour
 {
+    SerialPort serPort;// = new SerialPort("COM4", 9600);
+
     public bool pouring = false;
 
     public float minPourAngle = 70.0f;
@@ -16,9 +20,40 @@ public class Bottle : MonoBehaviour
     public float maxPourAmount = 1.0f;
 
     public Mixers currentContent;
-	
-	void FixedUpdate ()
+
+    Thread thread;
+    public int b = 0;
+    public int c = 0;
+    bool running = true;
+
+    void ThreadFunction()
     {
+        byte[] data = new byte[4];
+        while (running)
+        {
+            //b = serPort.Read(data,0,4);
+            b = serPort.ReadByte();
+           
+            c++;
+        }
+    }
+
+    void Start()
+    {
+        serPort = new SerialPort("COM8", 9600);
+        serPort.Open();
+        serPort.DiscardInBuffer();
+        //serPort.ReadTimeout = 10;
+        serPort.Write("R");
+
+       // thread = new Thread(ThreadFunction);
+      //  thread.Start();
+    }
+    void Update ()
+    {
+        b = serPort.ReadByte();
+        Tilt(b);
+
         if (Input.GetKey("1"))
         {
             Tilt(5.0f);
@@ -38,7 +73,7 @@ public class Bottle : MonoBehaviour
     //Used to set rotation of the bottle on the z axis
     public void Tilt(float tiltAmount)
     {
-        currentAngle += tiltAmount;
+        currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
         currentAngle = Mathf.Clamp(currentAngle, 0.0f, maxPourAngle);
 
         //changes the angle of the bottle based on the input
@@ -58,5 +93,10 @@ public class Bottle : MonoBehaviour
         scaledPourAmount = scaledPourAmount * 0.02f;
 
         currentContent.amountRequired += scaledPourAmount;
+    }
+
+    private void OnApplicationQuit()
+    {
+        running = false;
     }
 }
