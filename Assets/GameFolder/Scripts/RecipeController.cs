@@ -7,6 +7,7 @@ public class RecipeController : MonoBehaviour {
 
     public string[] lines;
     public string[] names;
+    public string[] colours;
     public string[] info;
 
     private void Start()
@@ -15,15 +16,15 @@ public class RecipeController : MonoBehaviour {
         lines = recipesInfo.text.Split("\n"[0]);
 
         //set the size of the recipes array in the GameManager to how many recipes we have
-        // -1 to the size as the first line of the .csv is for mixers not recipes
-        GameManager.Instance().recipes = new DrinkRecipes[lines.Length - 1];
+        // -2 to the size as the first and second lines of the .csv are for mixers, not recipes
+        GameManager.Instance().recipes = new DrinkRecipes[lines.Length - 2];
 
         //Read in the mixers from the .csv file
-        ReadInMixerNames(lines[0]);
+        ReadInMixerInfo(lines[0], lines[1]);
        
         //loop over the remaining lines to read in the recipes from the .csv file
-        //starts at 1 as the first line is the mixer names
-        for (int i = 1; i < lines.Length; i++)
+        //starts at 2 as the first line is the mixer names
+        for (int i = 2; i < lines.Length; i++)
         {
             ReadInRecipeInfo(lines[i], i);
         }
@@ -31,14 +32,16 @@ public class RecipeController : MonoBehaviour {
         GameManager.Instance().SetNewRecipe();
     }
 
-    void ReadInMixerNames(string nameLine)
+    void ReadInMixerInfo(string nameLine, string colour)
     {
         //Read in the line with all the mixer names and save them to the names array
         names = nameLine.Split(","[0]);
+        colours = colour.Split(","[0]);
 
         //set the size of the mixer array in the GameManager to how many we read in
         // -1 to the size as the first entry in the line is an empty cell
         GameManager.Instance().mixers = new Mixers[names.Length - 1];
+
 
         //loop over the read in mixer names and add them to the mixer array in the GameManager
         //loop starts at 1 to skip empty cell
@@ -47,6 +50,16 @@ public class RecipeController : MonoBehaviour {
             //create a temporary Mixer to set values to and to feed it back into the GameManager array
             Mixers readIn = new Mixers();
             readIn.mixerName = names[i];
+            Colour colourReadIn = new Colour();
+
+            int j = i;
+            colourReadIn.red = byte.Parse(colours[j]);
+            j++;
+            colourReadIn.green = byte.Parse(colours[j]);
+            j++;
+            colourReadIn.blue = byte.Parse(colours[j]);
+
+            readIn.mixerColour = colourReadIn;
 
             //set an entry in the GameManagers array of mixers to the mixer we just read in
             //"i-1" because we started the loop at 1
@@ -85,6 +98,7 @@ public class RecipeController : MonoBehaviour {
                 Mixers readInMixer = new Mixers();
                 //Set it's name to the corrisponding name in the GameManager mixer array (this could be better)
                 readInMixer.mixerName = GameManager.Instance().mixers[i - 1].mixerName;
+                readInMixer.mixerColour = GameManager.Instance().mixers[i - 1].mixerColour;
                 //Set the amount required for that ingredient based on what was read in
                 readInMixer.amountRequired = amount;
 
@@ -94,7 +108,7 @@ public class RecipeController : MonoBehaviour {
         }
 
         //Save the recipe to the GameManager's recipe array
-        // -1 to the index as the first line of the .csv is for mixers not recipes
-        GameManager.Instance().recipes[index-1] = readIn;
+        // -2 to the index as the first two line of the .csv are for mixers not recipes
+        GameManager.Instance().recipes[index - 2] = readIn;
     }
 }

@@ -7,7 +7,7 @@ using System;
 
 public class Bottle : MonoBehaviour
 {
-    SerialPort serPort;// = new SerialPort("COM4", 9600);
+    SerialPort serPort;
 
     public bool pouring = false;
 
@@ -21,33 +21,12 @@ public class Bottle : MonoBehaviour
 
     public Mixers currentContent;
 
-    Thread thread;
     public int b = 0;
-    public int c = 0;
-    bool running = true;
-
-    void ThreadFunction()
-    {
-        byte[] data = new byte[4];
-        while (running)
-        {
-            //b = serPort.Read(data,0,4);
-            b = serPort.ReadByte();
-           
-            c++;
-        }
-    }
 
     void Start()
     {
-        serPort = new SerialPort("COM8", 9600);
+        serPort = new SerialPort("COM5", 9600);
         serPort.Open();
-        serPort.DiscardInBuffer();
-        //serPort.ReadTimeout = 10;
-        serPort.Write("R");
-
-       // thread = new Thread(ThreadFunction);
-      //  thread.Start();
     }
     void Update ()
     {
@@ -95,8 +74,23 @@ public class Bottle : MonoBehaviour
         currentContent.amountRequired += scaledPourAmount;
     }
 
-    private void OnApplicationQuit()
+    public void SetBottleColour(Colour _colour)
     {
-        running = false;
+        byte[] colour = new byte[3];
+        colour[0] = _colour.red;
+        colour[1] = _colour.green;
+        colour[2] = _colour.blue;
+
+        serPort.Write(colour, 0, colour.Length);
+    }
+
+    void OnApplicationQuit()
+    {
+        Colour black = new Colour();
+        black.red = 0;
+        black.green = 0;
+        black.blue = 0;
+
+        SetBottleColour(black);
     }
 }

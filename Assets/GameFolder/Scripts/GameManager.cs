@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
             k = Random.Range(0, bottles.Length);
         } while (bottles[k].currentContent.mixerName != "");
         bottles[k].currentContent = currentRecipe.ingredients[index];
+        bottles[k].SetBottleColour(bottles[k].currentContent.mixerColour);
     }
 
     //this reads in the content of the bottles that have been poured and resets them and gets the score
