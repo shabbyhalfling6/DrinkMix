@@ -10,6 +10,7 @@ public class Bottle : MonoBehaviour
     SerialPort serPort;
 
     public bool pouring = false;
+    public bool serPortOpen = true;
 
     public float minPourAngle = 70.0f;
     public float maxPourAngle = 160.0f;
@@ -26,20 +27,41 @@ public class Bottle : MonoBehaviour
     void Start()
     {
         serPort = new SerialPort("COM5", 9600);
-        serPort.Open();
+
+        //tests if the serial port can be connected to
+        try
+        {
+            serPort.ReadBufferSize = 8192;
+            serPort.WriteBufferSize = 128;
+            serPort.Parity = Parity.None;
+            serPort.StopBits = StopBits.One;
+            serPort.Open();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not open serial port: " + e.Message);
+            serPortOpen = false;
+        }
+
+        this.enabled = false;
     }
     void Update ()
     {
-        b = serPort.ReadByte();
-        Tilt(b);
+        if (serPortOpen)
+        {
+            b = serPort.ReadByte();
+            Tilt(b);
+        }
 
         if (Input.GetKey("1"))
         {
-            Tilt(5.0f);
+            float tempF = currentAngle += 5.0f;
+            Tilt(tempF);
         }
         else if (Input.GetKey("2"))
         {
-            Tilt(-5.0f);
+            float tempF = currentAngle -= 5.0f;
+            Tilt(tempF);
         }
 
         //Test if the bottle is tilted enough to be pouring
@@ -52,7 +74,7 @@ public class Bottle : MonoBehaviour
     //Used to set rotation of the bottle on the z axis
     public void Tilt(float tiltAmount)
     {
-        currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
+        //currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
         currentAngle = Mathf.Clamp(currentAngle, 0.0f, maxPourAngle);
 
         //changes the angle of the bottle based on the input
@@ -81,7 +103,10 @@ public class Bottle : MonoBehaviour
         colour[1] = _colour.green;
         colour[2] = _colour.blue;
 
-        serPort.Write(colour, 0, colour.Length);
+        if (serPortOpen)
+        {
+            serPort.Write(colour, 0, colour.Length);
+        }
     }
 
     void OnApplicationQuit()

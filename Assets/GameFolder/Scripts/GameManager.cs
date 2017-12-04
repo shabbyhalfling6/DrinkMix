@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +9,17 @@ public class GameManager : MonoBehaviour
     public DrinkRecipes[] recipes;
     public Mixers[] mixers;
 
+    public Player player;
+    private ScoreManager score;
+
     //the current recipe displayed
     public DrinkRecipes currentRecipe;
 
-    public Text ingredientsText;
-    public Text recipeNameText;
+    public bool gameRunning = false;
+    public bool gameOver = false;
+    public float gameTimer = 60;
 
-    private ScoreManager score;
+    private UIManager uiManager;
 
     private static GameManager instance;
 
@@ -38,14 +41,30 @@ public class GameManager : MonoBehaviour
         instance = this;    
     }
 
-    void Start ()
+    void Start()
     {
         instance = this;
 
         //initialises all the bottles in the scene
         bottles = FindObjectsOfType(typeof(Bottle)) as Bottle[];
-        score = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        score = this.GetComponent<ScoreManager>();
+
+        uiManager = UIManager.Instance();
 	}
+
+    void Update()
+    {
+        if (gameRunning)
+        {
+            gameTimer -= Time.deltaTime;
+        }
+
+
+        if(gameTimer <= 0.0f)
+        {
+            gameOver = true;
+        }
+    }
 
     public void SetNewRecipe()
     {
@@ -53,16 +72,16 @@ public class GameManager : MonoBehaviour
         int randNum = Random.Range(0, recipes.Length);
         currentRecipe = recipes[randNum];
 
-        recipeNameText.text = currentRecipe.recipeName;
+        uiManager.recipeNameText.text = currentRecipe.recipeName;
 
-        ingredientsText.text = "";
+        uiManager.ingredientsText.text = "";
 
         for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
             SetBottleContents(i);
 
             if(currentRecipe.ingredients[i].amountRequired != 0)
-                ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
+                uiManager.ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
         }
 
         GetScore();
