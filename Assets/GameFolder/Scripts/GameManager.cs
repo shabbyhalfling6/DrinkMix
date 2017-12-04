@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     //the list of bottles in the game
     public Bottle[] bottles;
+    public BottlePickup[] bottlePickups;
     public DrinkRecipes[] recipes;
     public Mixers[] mixers;
 
@@ -15,11 +17,20 @@ public class GameManager : MonoBehaviour
     //the current recipe displayed
     public DrinkRecipes currentRecipe;
 
-    public bool gameRunning = false;
-    public bool gameOver = false;
-    public float gameTimer = 60;
+    public float gameTimer = 60.0f;
+    public float gameOverTimer = 20.0f;
 
     private UIManager uiManager;
+    public GameState currentGameState;
+
+    public enum GameState
+    {
+        mainMenu,
+        gameRunning,
+        gameOver,
+
+        gameStateNum
+    }
 
     private static GameManager instance;
 
@@ -49,20 +60,71 @@ public class GameManager : MonoBehaviour
         bottles = FindObjectsOfType(typeof(Bottle)) as Bottle[];
         score = this.GetComponent<ScoreManager>();
 
+        bottlePickups = new BottlePickup[bottles.Length];
+
+        for (int i = 0; i < bottles.Length; i++)
+        {
+            bottlePickups[i] = bottles[i].gameObject.GetComponent<BottlePickup>();
+            bottlePickups[i].enabled = false;
+        }
+
         uiManager = UIManager.Instance();
+        uiManager.SetHUD(false);
+        uiManager.SetMainMenu(true);
+        currentGameState = GameState.mainMenu;
 	}
 
     void Update()
     {
-        if (gameRunning)
+        switch (currentGameState)
         {
-            gameTimer -= Time.deltaTime;
-        }
+            case GameState.mainMenu:
+            {
+                if(Input.GetKeyDown(KeyCode.RightShift))
+                {
+                    player.enabled = true;
+                    for(int i = 0; i < bottlePickups.Length; i++)
+                    {
+                        bottlePickups[i].enabled = true;
+                    }
 
+                    SetNewRecipe();
 
-        if(gameTimer <= 0.0f)
-        {
-            gameOver = true;
+                    uiManager.SetMainMenu(false);
+                    uiManager.SetHUD(true);
+                    currentGameState = GameState.gameRunning;
+                }
+                break;
+            }
+            case GameState.gameRunning:
+            {
+                gameTimer -= Time.deltaTime;
+                if (gameTimer <= 0.0f)
+                {
+                    currentGameState = GameState.gameOver;
+
+                    for (int i = 0; i < bottlePickups.Length; i++)
+                    {
+                        bottlePickups[i].enabled = false;
+                    }
+
+                    uiManager.SetGameOverMenu(true);
+                    uiManager.SetHUD(false);
+                    player.enabled = false;
+                }
+
+                break;
+            }
+            case GameState.gameOver:
+            {
+                gameOverTimer -= Time.deltaTime;
+                if(gameOverTimer <= 0.0f)
+                {
+                    // re load game scene
+                    SceneManager.LoadScene(0);
+                }
+                break;
+            }
         }
     }
 

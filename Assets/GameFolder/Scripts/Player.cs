@@ -24,14 +24,13 @@ public class Player : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            GameManager.Instance().SetNewRecipe();
             anim.SetBool("Playing", true);
             anim.SetBool("Reset", false);
             reset++;
         }
         else if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            //GameManager.Instance().SetNewRecipe();
+            GameManager.Instance().SetNewRecipe();
             anim.SetBool("Playing", false);
             reset = 0;
         }

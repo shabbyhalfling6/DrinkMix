@@ -8,12 +8,12 @@ public class UIManager : MonoBehaviour
     public Text ingredientsText;
     public Text recipeNameText;
 
-    //put the other UI elements here so you can manage them
+    public GameObject mainMenuCavas;
+    public GameObject gameOverCanvas;
+    public GameObject HUDCanvas;
 
-    private GameManager gameManager;
-
-    private static UIManager instance;
-
+    public static UIManager instance;
+    
     public static UIManager Instance()
     {
         if (instance == null)
@@ -30,18 +30,20 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        gameManager = GameManager.Instance();
     }
 	
-	void Update ()
+    public void SetHUD(bool enable)
     {
-        if(Input.GetKeyDown(KeyCode.RightShift))
-        {
-            //enable the player controls and set the game to running
-            gameManager.player.enabled = true;
-            gameManager.gameRunning = true;
-            //main menu disable
-        }
-	}
+
+    }
+
+    public void SetMainMenu(bool enable)
+    {
+
+    }
+
+    public void SetGameOverMenu(bool enable)
+    {
+
+    }
 }
