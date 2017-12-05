@@ -26,15 +26,15 @@ public class Bottle : MonoBehaviour
 
     void Start()
     {
-        serPort = new SerialPort("COM5", 9600);
+        serPort = new SerialPort("COM6", 9600);
 
         //tests if the serial port can be connected to
         try
         {
-            serPort.ReadBufferSize = 8192;
-            serPort.WriteBufferSize = 128;
-            serPort.Parity = Parity.None;
-            serPort.StopBits = StopBits.One;
+            //serPort.ReadBufferSize = 8192;
+            //serPort.WriteBufferSize = 128;
+            //serPort.Parity = Parity.None;
+            //serPort.StopBits = StopBits.One;
             serPort.Open();
         }
         catch (Exception e)
@@ -74,7 +74,7 @@ public class Bottle : MonoBehaviour
     //Used to set rotation of the bottle on the z axis
     public void Tilt(float tiltAmount)
     {
-        //currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
+        currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
         currentAngle = Mathf.Clamp(currentAngle, 0.0f, maxPourAngle);
 
         //changes the angle of the bottle based on the input
