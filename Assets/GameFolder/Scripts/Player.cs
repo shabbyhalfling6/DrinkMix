@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            GameManager.Instance().SetNewRecipe();
+            GameManager.Instance().SetNewRecipe(true);
             anim.SetBool("Playing", false);
             reset = 0;
         }

@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                         bottlePickups[i].enabled = true;
                     }
 
-                    SetNewRecipe();
+                    SetNewRecipe(false);
 
                     uiManager.SetMainMenu(false);
                     uiManager.SetHUD(true);
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
             case GameState.gameRunning:
             {
                 gameTimer -= Time.deltaTime;
+                uiManager.shiftTimer.text = ((int)gameTimer).ToString();
                 if (gameTimer <= 0.0f)
                 {
                     currentGameState = GameState.gameOver;
@@ -128,8 +129,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetNewRecipe()
+    public void SetNewRecipe(bool getScore)
     {
+        if (getScore)
+            GetScore();
+
         //Set a new recipe from the list of recipes in the recipe controller
         int randNum = Random.Range(0, recipes.Length);
         currentRecipe = recipes[randNum];
@@ -145,8 +149,6 @@ public class GameManager : MonoBehaviour
             if(currentRecipe.ingredients[i].amountRequired != 0)
                 uiManager.ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
         }
-
-        GetScore();
     }
 
     void SetBottleContents(int index)
@@ -174,7 +176,7 @@ public class GameManager : MonoBehaviour
         mixedRecipes.ingredients = new Mixers[bottles.Length];
         mixedRecipes.recipeName = "DrinkMix";
 
-        for (int i = 0; i < bottles.Length; i++)
+        for (int i = 0; i < mixedRecipes.ingredients.Length; i++)
         {
             mixedRecipes.ingredients[i] = bottles[i].currentContent;
         }

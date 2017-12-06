@@ -31,10 +31,6 @@ public class Bottle : MonoBehaviour
         //tests if the serial port can be connected to
         try
         {
-            //serPort.ReadBufferSize = 8192;
-            //serPort.WriteBufferSize = 128;
-            //serPort.Parity = Parity.None;
-            //serPort.StopBits = StopBits.One;
             serPort.Open();
         }
         catch (Exception e)
@@ -63,7 +59,10 @@ public class Bottle : MonoBehaviour
             float tempF = currentAngle -= 5.0f;
             Tilt(tempF);
         }
+    }
 
+    private void FixedUpdate()
+    {
         //Test if the bottle is tilted enough to be pouring
         if (currentAngle >= minPourAngle)
         {

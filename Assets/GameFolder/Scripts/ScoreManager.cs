@@ -9,26 +9,24 @@ public class ScoreManager : MonoBehaviour {
     // A base score rewarded depending on how close you get to the amount required
     public int scoreBase = 10;
 
-    private DrinkRecipes mixedRecipe;
-    private DrinkRecipes currentRecipes;
-
-    public void SetRecipes(DrinkRecipes _mixedRecipes, DrinkRecipes _currentRecipes)
+    public void SetRecipes(DrinkRecipes _mixedRecipe, DrinkRecipes _currentRecipe)
     {
-        mixedRecipe = _mixedRecipes;
-        currentRecipes = _currentRecipes;
-
-        ScoreCalculation();
+        ScoreCalculation(_currentRecipe, _mixedRecipe);
     }
 
-    void ScoreCalculation()
+    void ScoreCalculation(DrinkRecipes currentRecipe, DrinkRecipes mixedRecipe)
     {
-        for(int i = 0; i < currentRecipes.ingredients.Length; i++)
+        for(int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
             for(int j = 0; j < mixedRecipe.ingredients.Length; j++)
             {
-                if(currentRecipes.ingredients[i].mixerName == mixedRecipe.ingredients[j].mixerName)
+                if (mixedRecipe.ingredients[j].mixerName == currentRecipe.ingredients[i].mixerName)
                 {
-                    //Score stuff goes here
+                    float currentRecipeAmount = currentRecipe.ingredients[i].amountRequired;
+                    float mixedRecipeAmount = mixedRecipe.ingredients[j].amountRequired;
+
+                    float percentage = (mixedRecipeAmount/currentRecipeAmount) * 100;
+                    Debug.Log(percentage);
                 }
             }
         }

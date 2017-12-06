@@ -7,8 +7,10 @@ public class UIManager : MonoBehaviour
 {
     public Text ingredientsText;
     public Text recipeNameText;
+    public Text shiftTimer;
+    public Text score;
 
-    public GameObject mainMenuCavas;
+    public GameObject mainMenuCanvas;
     public GameObject gameOverCanvas;
     public GameObject HUDCanvas;
 
@@ -31,19 +33,19 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
     }
-	
+
     public void SetHUD(bool enable)
     {
-
+        HUDCanvas.SetActive(enable);
     }
 
     public void SetMainMenu(bool enable)
     {
-
+        mainMenuCanvas.SetActive(enable);
     }
 
     public void SetGameOverMenu(bool enable)
     {
-
+        gameOverCanvas.SetActive(enable);
     }
 }
