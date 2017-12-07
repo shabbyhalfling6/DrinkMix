@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.mainMenu:
             {
-                if(Input.GetKeyDown(KeyCode.RightShift))
+                if (Input.GetMouseButtonDown(1))
                 {
                     player.enabled = true;
                     for(int i = 0; i < bottlePickups.Length; i++)
