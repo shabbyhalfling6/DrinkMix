@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0981c2b7ec679394eb8f37d503760631
-timeCreated: 1512832211
+guid: bb6fdaf3731ab6d49936afe43adf6fb2
+timeCreated: 1512831617
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
+    4300000: Cylinder.004
   materials:
     importMaterials: 1
     materialName: 0
@@ -50,7 +50,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

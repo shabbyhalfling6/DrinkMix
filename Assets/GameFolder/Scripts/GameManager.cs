@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public DrinkRecipes[] recipes;
     public Mixers[] mixers;
 
-    public Player player;
+    private Player player;
     private ScoreManager score;
 
     //the current recipe displayed
@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
             bottlePickups[i].enabled = false;
         }
 
+        player = (Player)FindObjectOfType(typeof(Player));
+        player.enabled = false;
         uiManager = UIManager.Instance();
         uiManager.SetHUD(false);
         uiManager.SetMainMenu(true);
@@ -111,6 +113,8 @@ public class GameManager : MonoBehaviour
 
                     uiManager.SetGameOverMenu(true);
                     uiManager.SetHUD(false);
+
+                    player = (Player)FindObjectOfType(typeof(Player));
                     player.enabled = false;
                 }
 
