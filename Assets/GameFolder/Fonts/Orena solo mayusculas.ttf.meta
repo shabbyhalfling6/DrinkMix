@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a84dd9b2b6b572342a341ac3d8543a30
+timeCreated: 1512916083
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Orena
+  fontNames:
+  - Orena
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
