@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     private Animator anim;
-    private Transform startPos;
     private GameObject glass;
 
     private bool finishedPlaying = false;

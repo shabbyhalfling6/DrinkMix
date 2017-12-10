@@ -79,7 +79,9 @@ public class RecipeController : MonoBehaviour {
 
         //set the size of the ingredients array to the amount that was read in at the first line
         // -1 to the size as the first entry in the line is an empty cell
-        readIn.ingredients = new Mixers[names.Length - 1];
+
+
+        Mixers[] tempMixers = new Mixers[6];
 
         int size = 0;
 
@@ -100,8 +102,18 @@ public class RecipeController : MonoBehaviour {
                 //Set the amount required for that ingredient based on what was read in
                 readInMixer.amountRequired = amount;
 
-                readIn.ingredients[size] = readInMixer;
+                tempMixers[size] = readInMixer;
                 size++;
+            }
+        }
+
+        readIn.ingredients = new Mixers[size];
+
+        for(int i = 0; i < readIn.ingredients.Length; i++)
+        {
+            if(tempMixers != null)
+            {
+                readIn.ingredients[i] = tempMixers[i];
             }
         }
 

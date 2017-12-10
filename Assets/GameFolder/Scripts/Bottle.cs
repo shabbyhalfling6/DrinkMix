@@ -93,6 +93,8 @@ public class Bottle : MonoBehaviour
         scaledPourAmount = scaledPourAmount * 0.02f;
 
         currentContent.amountRequired += scaledPourAmount;
+
+        string recipeText = UIManager.Instance().ingredientsText.text;
     }
 
     public void SetBottleColour(Colour _colour)
