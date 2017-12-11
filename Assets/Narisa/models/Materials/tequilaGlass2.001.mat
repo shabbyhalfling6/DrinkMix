@@ -80,6 +80,6 @@ Material:
     - _VertexColor: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.6112132, g: 0.97794116, b: 0.6744422, a: 0.100000024}
+    - _Color: {r: 0, g: 0, b: 255, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.1544118, g: 0.1544118, b: 0.1544118, a: 1}

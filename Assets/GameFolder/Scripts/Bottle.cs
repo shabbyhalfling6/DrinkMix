@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
-using System.Threading;
 using System;
 
 public class Bottle : MonoBehaviour
@@ -21,6 +20,7 @@ public class Bottle : MonoBehaviour
     public float maxPourAmount = 1.0f;
 
     public Mixers currentContent;
+    public Material thisMaterial;
 
     public int b = 0;
 
@@ -94,7 +94,14 @@ public class Bottle : MonoBehaviour
 
         currentContent.amountRequired += scaledPourAmount;
 
-        string recipeText = UIManager.Instance().ingredientsText.text;
+        for(int i = 0; i < GameManager.Instance().bottles.Length; i++)
+        {
+            if(this.currentContent.mixerName == GameManager.Instance().bottles[i].currentContent.mixerName)
+            {
+
+                UIManager.Instance().percentages[i].text = ((int)currentContent.amountRequired).ToString();
+            }
+        }
     }
 
     public void SetBottleColour(Colour _colour)
@@ -108,8 +115,22 @@ public class Bottle : MonoBehaviour
         {
             serPort.Write(colour, 0, colour.Length);
         }
+
+        thisMaterial.color = new Color(_colour.red, _colour.green, _colour.blue, 1);
+
+        /*
+        float H;
+        float S;
+        float B;
+        Color.RGBToHSV(thisMaterial.color,out H,out S,out B);
+
+        B = 2;
+
+        thisMaterial.color = Color.HSVToRGB(H, S, B);
+        */
     }
 
+    /*
     void OnApplicationQuit()
     {
         Colour black = new Colour();
@@ -118,5 +139,5 @@ public class Bottle : MonoBehaviour
         black.blue = 0;
 
         SetBottleColour(black);
-    }
+    }*/
 }

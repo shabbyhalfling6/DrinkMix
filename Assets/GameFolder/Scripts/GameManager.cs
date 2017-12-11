@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public float gameTimer = 60.0f;
     public float gameOverTimer = 20.0f;
 
+    public bool bottlePickedUp = false;
+
     private UIManager uiManager;
     public GameState currentGameState;
 
@@ -112,6 +114,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     uiManager.SetGameOverMenu(true);
+                    uiManager.gameOverScore.text = score.currentScore.ToString();
                     uiManager.SetHUD(false);
 
                     player = (Player)FindObjectOfType(typeof(Player));
@@ -144,21 +147,23 @@ public class GameManager : MonoBehaviour
 
         uiManager.recipeNameText.text = currentRecipe.recipeName;
 
-        uiManager.ingredientsText.text = "";
-
         //resets all bottles to be false
         for (int i = 0; i < bottles.Length; i++)
         {
             bottles[i].currentContent.mixerName = "";
-            bottles[i].currentContent.amountRequired = 0.0f;
+            uiManager.ingredientsText[i].text = "";
         }
 
         for (int i = 0; i < currentRecipe.ingredients.Length; i++)
         {
             SetBottleContents(i);
 
-            if(currentRecipe.ingredients[i].amountRequired != 0)
-                uiManager.ingredientsText.text += currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
+            if (currentRecipe.ingredients[i].amountRequired != 0)
+            {
+                uiManager.ingredientsText[i].text = currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
+                Colour tempColour = currentRecipe.ingredients[i].mixerColour;
+                uiManager.ingredientsText[i].color = new Color(tempColour.red, tempColour.green, tempColour.blue, 1);
+            }
         }
 
         for(int i = 0; i < bottles.Length; i++)
@@ -167,7 +172,7 @@ public class GameManager : MonoBehaviour
             if(bottles[i].currentContent.mixerName == "")
             {
                 //sets the rest of the bottles that aren't set to a random mixer
-                bottles[i].currentContent.mixerName = mixers[Random.Range(0, mixers.Length)].mixerName;
+                bottles[i].currentContent = mixers[Random.Range(0, mixers.Length)];
             }
         }
     }
@@ -180,7 +185,8 @@ public class GameManager : MonoBehaviour
         {
             k = Random.Range(0, bottles.Length);
         } while (bottles[k].currentContent.mixerName != "");
-        bottles[k].currentContent.mixerName = currentRecipe.ingredients[index].mixerName;
+        bottles[k].currentContent = currentRecipe.ingredients[index];
+        bottles[k].currentContent.amountRequired = 0.0f;
         bottles[k].SetBottleColour(bottles[k].currentContent.mixerColour);
     }
 

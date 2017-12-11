@@ -30,15 +30,21 @@ public class BottlePickup : MonoBehaviour
     {
         if (Input.GetKeyDown(pickUpKey))
         {
-            if(!pickedUp)
+
+            if (!GameManager.Instance().bottlePickedUp)
             {
-                pickedUp = true;
-                bottle.enabled = true;
+                if (!pickedUp)
+                {
+                    pickedUp = true;
+                    bottle.enabled = true;
+                    GameManager.Instance().bottlePickedUp = true;
+                }
             }
-            else if(pickedUp)
+            else if (pickedUp)
             {
                 pickedUp = false;
                 bottle.enabled = false;
+                GameManager.Instance().bottlePickedUp = false;
             }
 
             startPosition = transform.position;
