@@ -2384,7 +2384,7 @@ MonoBehaviour:
   maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 728883949fe9857488f85ab3b637f895, type: 2}
   b: 0
-  ComPort: COM6
+  ComPort: COM7
 --- !u!1 &1618971847
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,7 +48,8 @@ public class Bottle : MonoBehaviour
         if (serPortOpen)
         {
             b = serPort.ReadByte();
-            Tilt(b);
+            Debug.Log(b);
+            Tilt((221-b)*(180.0f/221.0f));
         }
 
         if (Input.GetKey("1"))
@@ -118,28 +119,6 @@ public class Bottle : MonoBehaviour
             serPort.Write(colorByte, 0, colorByte.Length);
         }
 
-        thisMaterial.color = new Color(_colour.red, _colour.green, _colour.blue, 1);
-
-        /*
-        float H;
-        float S;
-        float B;
-        Color.RGBToHSV(thisMaterial.color,out H,out S,out B);
-
-        B = 2;
-
-        thisMaterial.color = Color.HSVToRGB(H, S, B);
-        */
+        thisMaterial.color = new Color(_colour.red/255.0f, _colour.green/255.0f, _colour.blue/255.0f, 1);
     }
-
-    /*
-    void OnApplicationQuit()
-    {
-        Colour black = new Colour();
-        black.red = 0;
-        black.green = 0;
-        black.blue = 0;
-
-        SetBottleColour(black);
-    }*/
 }

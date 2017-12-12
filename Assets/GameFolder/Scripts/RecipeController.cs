@@ -43,6 +43,7 @@ public class RecipeController : MonoBehaviour {
 
         //loop over the read in mixer names and add them to the mixer array in the GameManager
         //loop starts at 1 to skip empty cell
+        int j = 1;
         for (int i = 1; i < names.Length; i++)
         {
             //create a temporary Mixer to set values to and to feed it back into the GameManager array
@@ -50,13 +51,13 @@ public class RecipeController : MonoBehaviour {
             readIn.mixerName = names[i];
             Colour colourReadIn = new Colour();
 
-            int j = i;
+           
             colourReadIn.red = byte.Parse(colours[j]);
             j++;
             colourReadIn.green = byte.Parse(colours[j]);
             j++;
             colourReadIn.blue = byte.Parse(colours[j]);
-
+            j++;
             readIn.mixerColour = colourReadIn;
 
             //set an entry in the GameManagers array of mixers to the mixer we just read in

@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
             {
                 uiManager.ingredientsText[i].text = currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
                 Colour tempColour = currentRecipe.ingredients[i].mixerColour;
-                uiManager.ingredientsText[i].color = new Color(tempColour.red, tempColour.green, tempColour.blue, 1);
+                uiManager.ingredientsText[i].color = new Color(tempColour.red/255.0f, tempColour.green/255.0f, tempColour.blue/255.0f, 1);
             }
         }
 
