@@ -24,9 +24,11 @@ public class Bottle : MonoBehaviour
 
     public int b = 0;
 
+    public string ComPort = "COM6";
+
     void Start()
     {
-        serPort = new SerialPort("COM6", 9600);
+        serPort = new SerialPort(ComPort, 9600);
 
         //tests if the serial port can be connected to
         try
@@ -106,14 +108,14 @@ public class Bottle : MonoBehaviour
 
     public void SetBottleColour(Colour _colour)
     {
-        byte[] colour = new byte[3];
-        colour[0] = _colour.red;
-        colour[1] = _colour.green;
-        colour[2] = _colour.blue;
+        byte[] colorByte = new byte[3];
+        colorByte[0] = 255;
+        colorByte[1] = 0;
+        colorByte[2] = 0;
 
         if (serPortOpen)
         {
-            serPort.Write(colour, 0, colour.Length);
+            serPort.Write(colorByte, 0, colorByte.Length);
         }
 
         thisMaterial.color = new Color(_colour.red, _colour.green, _colour.blue, 1);
