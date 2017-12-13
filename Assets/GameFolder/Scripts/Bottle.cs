@@ -6,8 +6,6 @@ using System;
 
 public class Bottle : MonoBehaviour
 {
-  //  SerialPort serPort;
-
     public bool pouring = false;
     public bool serPortOpen = true;
 
@@ -28,37 +26,15 @@ public class Bottle : MonoBehaviour
 
     void Start()
     {
-/*        serPort = new SerialPort(ComPort, 9600);
-
-        //tests if the serial port can be connected to
-        try
-        {
-            serPort.Open();
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Could not open serial port: " + e.Message);
-            serPortOpen = false;
-        }
-*/
         this.enabled = false;
     }
+
     void Update ()
     {
-/*        if (serPortOpen)
-        {
-            b = serPort.ReadByte();
-			int angle = b & 63;
-			int player = b >> 6;
-
-			Debug.Log("Player"+player+"   "+angle);
-            //Tilt((221-b)*(180.0f/221.0f));
-			Tilt((63-angle)*3.0f);
-        }
-*/
 		Tilt (SerialHolder.angle [id]);
-		if (SerialHolder.angle [id] > 15) {
-		//tilted?
+		if (SerialHolder.angle [id] > 15)
+        {
+		    //tilted?
 		}
 
         if (Input.GetKey("1"))

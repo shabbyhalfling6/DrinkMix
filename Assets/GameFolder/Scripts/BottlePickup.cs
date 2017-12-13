@@ -5,6 +5,7 @@ using UnityEngine;
 public class BottlePickup : MonoBehaviour
 {
     public bool pickedUp = false;
+
     //change this on the bottle prefab to change all bottles
     public float smoothFactor;
 
@@ -28,26 +29,19 @@ public class BottlePickup : MonoBehaviour
 	
 	void Update ()
     {
-		if (Input.GetKeyDown(pickUpKey) || SerialHolder.angle[id]>15) // fix id to come from bottle.  add put down code when goes below 15
+		if ((Input.GetKeyDown(pickUpKey) && !GameManager.Instance().bottlePickedUp) || SerialHolder.angle[bottle.id] > 15) // fix id to come from bottle.  add put down code when goes below 15
         {
-
-            if (!GameManager.Instance().bottlePickedUp)
-            {
-                if (!pickedUp)
-                {
-                    pickedUp = true;
-                    bottle.enabled = true;
-                    GameManager.Instance().bottlePickedUp = true;
-                }
-            }
-            else if (pickedUp)
-            {
-                pickedUp = false;
-                bottle.enabled = false;
-                GameManager.Instance().bottlePickedUp = false;
-            }
+            pickedUp = true;
+            bottle.enabled = true;
+            GameManager.Instance().bottlePickedUp = true;
 
             startPosition = transform.position;
+        }
+        else if ((Input.GetKeyDown(pickUpKey) && GameManager.Instance().bottlePickedUp) || SerialHolder.angle[bottle.id] < 15)
+        {
+            pickedUp = false;
+            bottle.enabled = false;
+            GameManager.Instance().bottlePickedUp = false;
         }
 
         if (pickedUp)
