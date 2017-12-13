@@ -28,7 +28,7 @@ public class BottlePickup : MonoBehaviour
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(pickUpKey))
+		if (Input.GetKeyDown(pickUpKey) || SerialHolder.angle[id]>15) // fix id to come from bottle.  add put down code when goes below 15
         {
 
             if (!GameManager.Instance().bottlePickedUp)

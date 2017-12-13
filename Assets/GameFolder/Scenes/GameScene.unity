@@ -215,8 +215,51 @@ MonoBehaviour:
   minPourAmount: 0
   maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 30efaf0b7af513a4bb0930b5e64b3d1a, type: 2}
+  id: 2
   b: 0
   ComPort: COM5
+--- !u!1 &210340119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 210340121}
+  - component: {fileID: 210340120}
+  m_Layer: 0
+  m_Name: SerialHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &210340120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210340119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7581638cd2b42446918948e8cb5b8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serPortOpen: 1
+  ComPort: COM3
+--- !u!4 &210340121
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210340119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &242173642
 Prefab:
   m_ObjectHideFlags: 0
@@ -1240,6 +1283,7 @@ MonoBehaviour:
   minPourAmount: 0
   maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 325dd48b5a81cc14ea44b37b4e272b2d, type: 2}
+  id: 1
   b: 0
   ComPort: COM5
 --- !u!1 &960362249
@@ -1444,6 +1488,7 @@ MonoBehaviour:
   minPourAmount: 0
   maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: bef7cc144d0326b4db04494308739948, type: 2}
+  id: 3
   b: 0
   ComPort: COM5
 --- !u!1001 &1033946073
@@ -2383,8 +2428,9 @@ MonoBehaviour:
   minPourAmount: 0
   maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 728883949fe9857488f85ab3b637f895, type: 2}
+  id: 0
   b: 0
-  ComPort: COM7
+  ComPort: COM3
 --- !u!1 &1618971847
 GameObject:
   m_ObjectHideFlags: 0

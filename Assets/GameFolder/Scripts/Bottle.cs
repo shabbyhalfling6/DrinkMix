@@ -6,7 +6,7 @@ using System;
 
 public class Bottle : MonoBehaviour
 {
-    SerialPort serPort;
+  //  SerialPort serPort;
 
     public bool pouring = false;
     public bool serPortOpen = true;
@@ -21,14 +21,14 @@ public class Bottle : MonoBehaviour
 
     public Mixers currentContent;
     public Material thisMaterial;
-
+	public int id = 0;
     public int b = 0;
 
     public string ComPort = "COM6";
 
     void Start()
     {
-        serPort = new SerialPort(ComPort, 9600);
+/*        serPort = new SerialPort(ComPort, 9600);
 
         //tests if the serial port can be connected to
         try
@@ -40,17 +40,26 @@ public class Bottle : MonoBehaviour
             Debug.Log("Could not open serial port: " + e.Message);
             serPortOpen = false;
         }
-
+*/
         this.enabled = false;
     }
     void Update ()
     {
-        if (serPortOpen)
+/*        if (serPortOpen)
         {
             b = serPort.ReadByte();
-            Debug.Log(b);
-            Tilt((221-b)*(180.0f/221.0f));
+			int angle = b & 63;
+			int player = b >> 6;
+
+			Debug.Log("Player"+player+"   "+angle);
+            //Tilt((221-b)*(180.0f/221.0f));
+			Tilt((63-angle)*3.0f);
         }
+*/
+		Tilt (SerialHolder.angle [id]);
+		if (SerialHolder.angle [id] > 15) {
+		//tilted?
+		}
 
         if (Input.GetKey("1"))
         {
@@ -116,7 +125,7 @@ public class Bottle : MonoBehaviour
 
         if (serPortOpen)
         {
-            serPort.Write(colorByte, 0, colorByte.Length);
+  //          serPort.Write(colorByte, 0, colorByte.Length);
         }
 
         thisMaterial.color = new Color(_colour.red/255.0f, _colour.green/255.0f, _colour.blue/255.0f, 1);

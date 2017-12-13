@@ -7,7 +7,7 @@ using System;
 public class LEDTest : MonoBehaviour {
 
     public SerialPort serPort;
-    public string ComPort = "COM6";
+    public string ComPort = "COM3";
     public byte[] colorByte;
 
     // Use this for initialization
