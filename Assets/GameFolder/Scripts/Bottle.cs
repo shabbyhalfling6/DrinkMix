@@ -111,7 +111,7 @@ public class Bottle : MonoBehaviour
         colorByte[2] = _colour.green;
         colorByte[3] = _colour.blue;
 
-        if (serPortOpen)
+        if (SerialHolder.serPortOpen)
         {
             SerialHolder.serPort.Write(colorByte, 0, colorByte.Length);
         }
