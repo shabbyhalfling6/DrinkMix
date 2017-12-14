@@ -5,13 +5,18 @@ using System.IO.Ports;
 using System;
 
 public class SerialHolder : MonoBehaviour {
-	SerialPort serPort;
-	public bool serPortOpen = true;
+	public static SerialPort serPort;
+	public static bool serPortOpen = true;
 	public static float[] angle=new float[4];
 
 	public string ComPort = "COM6";
 	// Use this for initialization
 	void Start () {
+        System.IO.StreamReader sr = new System.IO.StreamReader(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\serial.txt");
+        int port = 6;
+        int.TryParse(sr.ReadLine(), out port);
+        ComPort = "COM" + port;
+        Debug.Log(ComPort);
 		serPort = new SerialPort(ComPort, 9600);
 
 		//tests if the serial port can be connected to

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public Text[] ingredientsText;
     public Text[] percentages;
+    public string[] drinkNames = new string[4];
     public Text recipeNameText;
     public Text shiftTimer;
     public Text score;

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.mainMenu:
             {
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0))
                 {
                     player.enabled = true;
                     for(int i = 0; i < bottlePickups.Length; i++)
@@ -160,7 +160,8 @@ public class GameManager : MonoBehaviour
 
             if (currentRecipe.ingredients[i].amountRequired != 0)
             {
-                uiManager.ingredientsText[i].text = currentRecipe.ingredients[i].amountRequired.ToString() + "oz of " + currentRecipe.ingredients[i].mixerName + "\n\n";
+                uiManager.ingredientsText[i].text = currentRecipe.ingredients[i].amountRequired.ToString() + " oz of " + currentRecipe.ingredients[i].mixerName;
+                uiManager.drinkNames[i] = currentRecipe.ingredients[i].mixerName;
                 Colour tempColour = currentRecipe.ingredients[i].mixerColour;
                 uiManager.ingredientsText[i].color = new Color(tempColour.red/255.0f, tempColour.green/255.0f, tempColour.blue/255.0f, 1);
             }
@@ -204,5 +205,22 @@ public class GameManager : MonoBehaviour
         }
 
         score.SetRecipes(mixedRecipes, currentRecipe);
+        
+    }
+
+    public void ResetDrinks(bool reset)
+    {
+        if (reset)
+        {
+            for (int i = 0; i < bottles.Length; i++)
+            {
+                bottles[i].currentContent.amountRequired = 0.0f;
+            }
+            reset = false;
+        }
+        for (int i = 0; i < uiManager.ingredientsText.Length; i++)
+        {
+            uiManager.percentages[i].text = 0 + "  Percent of..";
+        }
     }
 }

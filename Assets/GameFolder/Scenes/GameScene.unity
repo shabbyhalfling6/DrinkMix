@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -197,6 +197,7 @@ MonoBehaviour:
   pickedUp: 0
   smoothFactor: 3
   pickUpKey: 101
+  pickedUpByKey: 0
 --- !u!114 &43136476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   minPourAmount: 0
-  maxPourAmount: 1
+  maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 30efaf0b7af513a4bb0930b5e64b3d1a, type: 2}
   id: 0
   b: 0
@@ -245,7 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7581638cd2b42446918948e8cb5b8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serPortOpen: 1
   ComPort: COM6
 --- !u!4 &210340121
 Transform:
@@ -824,6 +824,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -1053,8 +1067,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 753.8, y: -417.69}
-  m_SizeDelta: {x: 152.7, y: 147.8}
+  m_AnchoredPosition: {x: 703.4, y: -417.69}
+  m_SizeDelta: {x: 195.9, y: 147.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &615840573
 MonoBehaviour:
@@ -1068,7 +1082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6838235, g: 0.562594, b: 0.45253026, a: 1}
+  m_Color: {r: 0.3602941, g: 0.28114638, b: 0.20928848, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1251,6 +1265,7 @@ MonoBehaviour:
   pickedUp: 0
   smoothFactor: 3
   pickUpKey: 119
+  pickedUpByKey: 0
 --- !u!114 &957843244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,7 +1282,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   minPourAmount: 0
-  maxPourAmount: 1
+  maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 325dd48b5a81cc14ea44b37b4e272b2d, type: 2}
   id: 0
   b: 0
@@ -1456,6 +1471,7 @@ MonoBehaviour:
   pickedUp: 0
   smoothFactor: 3
   pickUpKey: 114
+  pickedUpByKey: 0
 --- !u!114 &1015586814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,7 +1488,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   minPourAmount: 0
-  maxPourAmount: 1
+  maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: bef7cc144d0326b4db04494308739948, type: 2}
   id: 0
   b: 0
@@ -2027,7 +2043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 616.8, y: -315}
+  m_AnchoredPosition: {x: 522.49994, y: -315}
   m_SizeDelta: {x: 51.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482489448
@@ -2062,7 +2078,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 0 Percent of..
 --- !u!222 &1482489449
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2233,7 +2249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 616.8, y: -369.1}
+  m_AnchoredPosition: {x: 522.49994, y: -369.1}
   m_SizeDelta: {x: 51.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505246787
@@ -2268,7 +2284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 0 Percent of..
 --- !u!222 &1505246788
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2396,6 +2412,7 @@ MonoBehaviour:
   pickedUp: 0
   smoothFactor: 3
   pickUpKey: 113
+  pickedUpByKey: 0
 --- !u!114 &1609089658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,7 +2429,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   minPourAmount: 0
-  maxPourAmount: 1
+  maxPourAmount: 0.5
   thisMaterial: {fileID: 2100000, guid: 728883949fe9857488f85ab3b637f895, type: 2}
   id: 0
   b: 0
@@ -2454,6 +2471,11 @@ MonoBehaviour:
   - {fileID: 1482489448}
   - {fileID: 1505246787}
   - {fileID: 2134392970}
+  drinkNames:
+  - 
+  - 
+  - 
+  - 
   recipeNameText: {fileID: 2121033848}
   shiftTimer: {fileID: 1886122847}
   score: {fileID: 356774631}
@@ -2847,7 +2869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 618, y: -263.2}
+  m_AnchoredPosition: {x: 523.7, y: -263.2}
   m_SizeDelta: {x: 51.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1876209280
@@ -2882,7 +2904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 0 Percent of..
 --- !u!222 &1876209281
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3171,7 +3193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 749.6, y: -195.2}
+  m_AnchoredPosition: {x: 656.1, y: -195.2}
   m_SizeDelta: {x: 316.8, y: 63.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121033848
@@ -3186,7 +3208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.8911407, g: 0.9264706, b: 0.2861159, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3245,7 +3267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 617.5, y: -425.8}
+  m_AnchoredPosition: {x: 523.19995, y: -425.8}
   m_SizeDelta: {x: 51.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134392970
@@ -3280,7 +3302,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 0 Percent of..
 --- !u!222 &2134392971
 CanvasRenderer:
   m_ObjectHideFlags: 0

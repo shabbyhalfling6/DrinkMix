@@ -10,24 +10,35 @@ public class Player : MonoBehaviour {
     private bool finishedPlaying = false;
     private bool buttonPressed = false;
 
-	void Start ()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
+
+    }
+
+    void Start ()
+    {
         glass = this.gameObject;
 	}
 	
 	void Update ()
     {
-        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !buttonPressed)
+        if ((Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(0)) && !buttonPressed)
         {
             Instantiate(glass);
             anim.SetBool("SlideOut", true);
             buttonPressed = true;
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             GameManager.Instance().SetNewRecipe(true);
+            GameManager.Instance().ResetDrinks(false);
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            GameManager.Instance().ResetDrinks(true);
         }
 
         if(finishedPlaying)

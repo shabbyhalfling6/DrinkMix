@@ -16,6 +16,7 @@ public class BottlePickup : MonoBehaviour
 
     private Vector3 startPosition;
     private Vector3 originalPosition;
+    public bool pickedUpByKey;
 
     void Start ()
     {
@@ -25,24 +26,59 @@ public class BottlePickup : MonoBehaviour
         startPosition = originalPosition;
 
         tiltPosition = GameObject.Find("BottleTiltPosition").transform;
+        pickedUpByKey = false;
 	}
 	
 	void Update ()
     {
-		if ((Input.GetKeyDown(pickUpKey) && !GameManager.Instance().bottlePickedUp) || SerialHolder.angle[bottle.id] > 15) // fix id to come from bottle.  add put down code when goes below 15
+        if(!GameManager.Instance().bottlePickedUp)
         {
-            pickedUp = true;
-            bottle.enabled = true;
-            GameManager.Instance().bottlePickedUp = true;
+            if (Input.GetKeyDown(pickUpKey))
+            {
+                pickedUp = true;
+                bottle.enabled = true;
+                GameManager.Instance().bottlePickedUp = true;
 
-            startPosition = transform.position;
+                startPosition = transform.position;
+                pickedUpByKey = true;
+            }
+            if(SerialHolder.angle[bottle.id] > 15)
+            {
+                pickedUp = true;
+                bottle.enabled = true;
+                GameManager.Instance().bottlePickedUp = true;
+
+                startPosition = transform.position;
+                pickedUpByKey = false;
+            }
         }
-        else if ((Input.GetKeyDown(pickUpKey) && GameManager.Instance().bottlePickedUp) || SerialHolder.angle[bottle.id] < 15)
+        else
         {
-            pickedUp = false;
-            bottle.enabled = false;
-            GameManager.Instance().bottlePickedUp = false;
+           if((pickedUpByKey && Input.GetKeyDown(pickUpKey) && pickedUp) || (!pickedUpByKey && SerialHolder.angle[bottle.id] < 15) && pickedUp)
+            {
+                pickedUp = false;
+                bottle.enabled = false;
+                GameManager.Instance().bottlePickedUp = false;
+            }
         }
+
+
+
+
+		//if ((Input.GetKeyDown(pickUpKey)  || SerialHolder.angle[bottle.id] > 15) && !GameManager.Instance().bottlePickedUp) // fix id to come from bottle.  add put down code when goes below 15
+  //      {
+  //          pickedUp = true;
+  //          bottle.enabled = true;
+  //          GameManager.Instance().bottlePickedUp = true;
+
+  //          startPosition = transform.position;
+  //      }
+  //      else if ((Input.GetKeyDown(pickUpKey)  || SerialHolder.angle[bottle.id] < 15) && GameManager.Instance().bottlePickedUp)
+  //      {
+  //          pickedUp = false;
+  //          bottle.enabled = false;
+  //          GameManager.Instance().bottlePickedUp = false;
+  //      }
 
         if (pickedUp)
         {

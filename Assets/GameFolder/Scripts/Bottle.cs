@@ -31,21 +31,27 @@ public class Bottle : MonoBehaviour
 
     void Update ()
     {
-		Tilt (SerialHolder.angle [id]);
-		if (SerialHolder.angle [id] > 15)
+        if (SerialHolder.serPortOpen)
         {
-		    //tilted?
-		}
-
-        if (Input.GetKey("1"))
-        {
-            float tempF = currentAngle += 5.0f;
-            Tilt(tempF);
+            Tilt(SerialHolder.angle[id]);
         }
-        else if (Input.GetKey("2"))
+        else
         {
-            float tempF = currentAngle -= 5.0f;
-            Tilt(tempF);
+            if (SerialHolder.angle[id] > 15)
+            {
+                //tilted?
+            }
+
+            if (Input.GetKey("1"))
+            {
+                float tempF = currentAngle += 5.0f;
+                Tilt(tempF);
+            }
+            else if (Input.GetKey("2"))
+            {
+                float tempF = currentAngle -= 5.0f;
+                Tilt(tempF);
+            }
         }
     }
 
@@ -82,26 +88,32 @@ public class Bottle : MonoBehaviour
 
         currentContent.amountRequired += scaledPourAmount;
 
-        for(int i = 0; i < GameManager.Instance().bottles.Length; i++)
+        for(int i = 0; i < UIManager.Instance().drinkNames.Length; i++)
         {
-            if(this.currentContent.mixerName == GameManager.Instance().bottles[i].currentContent.mixerName)
+            if(this.currentContent.mixerName == UIManager.Instance().drinkNames[i])
             {
-
-                UIManager.Instance().percentages[i].text = ((int)currentContent.amountRequired).ToString();
+                for (int j = 0; j < GameManager.Instance().currentRecipe.ingredients.Length; j++)
+                {
+                    if (this.currentContent.mixerName == GameManager.Instance().currentRecipe.ingredients[j].mixerName)
+                    {
+                        UIManager.Instance().percentages[i].text = ((int)(currentContent.amountRequired / GameManager.Instance().currentRecipe.ingredients[j].amountRequired * 100)).ToString() + "  Percent of.." ;
+                    }
+                }
             }
         }
     }
 
     public void SetBottleColour(Colour _colour)
     {
-        byte[] colorByte = new byte[3];
-        colorByte[0] = 255;
-        colorByte[1] = 0;
-        colorByte[2] = 0;
+        byte[] colorByte = new byte[4];
+        colorByte[0] = (byte)(0x18 | id);
+        colorByte[1] = _colour.red;
+        colorByte[2] = _colour.green;
+        colorByte[3] = _colour.blue;
 
         if (serPortOpen)
         {
-  //          serPort.Write(colorByte, 0, colorByte.Length);
+            SerialHolder.serPort.Write(colorByte, 0, colorByte.Length);
         }
 
         thisMaterial.color = new Color(_colour.red/255.0f, _colour.green/255.0f, _colour.blue/255.0f, 1);
