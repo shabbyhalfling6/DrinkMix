@@ -62,24 +62,6 @@ public class BottlePickup : MonoBehaviour
             }
         }
 
-
-
-
-		//if ((Input.GetKeyDown(pickUpKey)  || SerialHolder.angle[bottle.id] > 15) && !GameManager.Instance().bottlePickedUp) // fix id to come from bottle.  add put down code when goes below 15
-  //      {
-  //          pickedUp = true;
-  //          bottle.enabled = true;
-  //          GameManager.Instance().bottlePickedUp = true;
-
-  //          startPosition = transform.position;
-  //      }
-  //      else if ((Input.GetKeyDown(pickUpKey)  || SerialHolder.angle[bottle.id] < 15) && GameManager.Instance().bottlePickedUp)
-  //      {
-  //          pickedUp = false;
-  //          bottle.enabled = false;
-  //          GameManager.Instance().bottlePickedUp = false;
-  //      }
-
         if (pickedUp)
         {
             LerpBetween(startPosition, tiltPosition.position, smoothFactor);

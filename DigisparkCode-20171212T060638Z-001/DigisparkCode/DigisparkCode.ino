@@ -17,7 +17,6 @@ void setup()
 
 void loop() 
 {
-  
   // Read in analog reading
   x = analogRead(xPin);
   x-=330;
@@ -26,24 +25,10 @@ void loop()
   z = analogRead(zPin);
   z-=250;
 
+  //calculate 
   float length = sqrt(x*x + y*y + z*z);
 
   int tiltAngle = acos(z/length) * 57.29f;
   //analogWrite(analogOutPin, tiltAngle);//(x+330)/3);
-  analogWrite(analogOutPin, (z+250)/2);
-
-//if(y>0)
-//  analogWrite(analogOutPin, 255);
-//else
-//  analogWrite(analogOutPin, 0);
-  /*static int a=0;
-  a++;
-  analogWrite(analogOutPin,a);
-  delay(10);
-  if(a>=255) a=0;
-  //analogWrite(analogOutPin, 0);
-  //delay(100);
-  //analogWrite(analogOutPin, 255);
-  //delay(100);    
-  */                                                                                                                     
+  analogWrite(analogOutPin, (z+250)/2);                                                                                                                   
 }

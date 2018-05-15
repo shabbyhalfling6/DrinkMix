@@ -20,7 +20,6 @@ public class Bottle : MonoBehaviour
     public Mixers currentContent;
     public Material thisMaterial;
 	public int id = 0;
-    public int b = 0;
 
     public string ComPort = "COM6";
 
