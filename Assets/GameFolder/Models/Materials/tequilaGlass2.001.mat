@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5da13de1423af4fc2bc2719a8513c0db, type: 3}
+        m_Texture: {fileID: 2800000, guid: d245f9671bf6842d48d1a304086ee00d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonShade:
-        m_Texture: {fileID: 2800000, guid: 39413e2567f4b452db0d4a76dbef5419, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -71,7 +71,7 @@ Material:
     - _Metallic: 0
     - _Mode: 3
     - _OcclusionStrength: 1
-    - _Outline: 2.72
+    - _Outline: 2
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -81,6 +81,6 @@ Material:
     - _VertexColor: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.8, g: 0, b: 0.4, a: 1}
+    - _Color: {r: 0.9191176, g: 0.4933499, b: 0.9191176, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.1544118, g: 0.1544118, b: 0.1544118, a: 1}

@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             GameManager.Instance().SetNewRecipe(true);
-            GameManager.Instance().ResetDrinks(false);
+            //GameManager.Instance().ResetDrinks(false);
         }
 
         if(Input.GetMouseButtonDown(1))

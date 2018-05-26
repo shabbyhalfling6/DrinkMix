@@ -6,41 +6,31 @@ using System;
 
 public class Bottle : MonoBehaviour
 {
-    public bool pouring = false;
-    public bool serPortOpen = true;
-
     public float minPourAngle = 70.0f;
     public float maxPourAngle = 160.0f;
 
     private float currentAngle = 0.0f;
-
-    public float minPourAmount = 0.0f;
-    public float maxPourAmount = 1.0f;
+    public float pourAmount = 1.0f;
 
     public Mixers currentContent;
-    public Material thisMaterial;
 	public int id = 0;
-
-    public string ComPort = "COM6";
 
     void Start()
     {
+        // Set this bottle scipt to be disabled at the start of the game until the bottle has been picked up
         this.enabled = false;
     }
 
     void Update ()
     {
+        // Check if we're connected to a serial port, else use keyboard input
         if (SerialHolder.serPortOpen)
         {
+            // Update the tilt with the angle from the serial port input
             Tilt(SerialHolder.angle[id]);
         }
         else
         {
-            if (SerialHolder.angle[id] > 15)
-            {
-                //tilted?
-            }
-
             if (Input.GetKey("1"))
             {
                 float tempF = currentAngle += 5.0f;
@@ -66,7 +56,9 @@ public class Bottle : MonoBehaviour
     //Used to set rotation of the bottle on the z axis
     public void Tilt(float tiltAmount)
     {
+        // NOTE: not sure where these magic numbers are coming from
         currentAngle = currentAngle * 0.7f + tiltAmount * 0.3f;
+        // Make sure the bottle can't be tilted past these angles
         currentAngle = Mathf.Clamp(currentAngle, 0.0f, maxPourAngle);
 
         //changes the angle of the bottle based on the input
@@ -76,17 +68,19 @@ public class Bottle : MonoBehaviour
     public void Pour()
     {
         //pour the amount of liquid based on the current tilt angle
-        //get the scaled angle between the max and minn pour angles
+        //get the scaled angle between the max and min pour angles
         float scaledPourAngle = (currentAngle - minPourAngle) / (maxPourAngle - minPourAngle);
 
         //get the scaled current amount of liquid leaving the bottle based on the scaled pour angle
-        float scaledPourAmount = scaledPourAngle * maxPourAmount;
+        float scaledPourAmount = scaledPourAngle * pourAmount;
 
         //divide that amount by 0.02 so it's a per frame amount
         scaledPourAmount = scaledPourAmount * 0.02f;
 
+        // NOTE: there's probably a better way to do this
         currentContent.amountRequired += scaledPourAmount;
 
+        // ...and this
         for(int i = 0; i < UIManager.Instance().drinkNames.Length; i++)
         {
             if(this.currentContent.mixerName == UIManager.Instance().drinkNames[i])
@@ -100,21 +94,5 @@ public class Bottle : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SetBottleColour(Colour _colour)
-    {
-        byte[] colorByte = new byte[4];
-        colorByte[0] = (byte)(0x18 | id);
-        colorByte[1] = _colour.red;
-        colorByte[2] = _colour.green;
-        colorByte[3] = _colour.blue;
-
-        if (SerialHolder.serPortOpen)
-        {
-            SerialHolder.serPort.Write(colorByte, 0, colorByte.Length);
-        }
-
-        thisMaterial.color = new Color(_colour.red/255.0f, _colour.green/255.0f, _colour.blue/255.0f, 1);
     }
 }

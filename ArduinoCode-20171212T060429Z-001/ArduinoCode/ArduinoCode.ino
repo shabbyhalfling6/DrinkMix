@@ -1,13 +1,11 @@
-int tiltAngle = 0;
-int state=0;
-int target = 0;
 
 void setup()
 {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("Uno");
   pinMode(8,INPUT);
+  pinMode(9,INPUT);
+  pinMode(10,INPUT);
+  pinMode(11,INPUT);
 }
 
 void loop()
@@ -22,7 +20,7 @@ void loop()
     if(b<0) b=0;
     b = b | (i<<6);
     Serial.write((char)b);
-    delay(30);
+    delay(100);
   }
 }
 

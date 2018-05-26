@@ -70,6 +70,6 @@ public class ScoreManager : MonoBehaviour {
         else
             currentScore += badScore;
 
-        UIManager.Instance().score.text = "$" + currentScore.ToString();
+        UIManager.Instance().score.text = currentScore.ToString();
     }
 }
