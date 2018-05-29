@@ -1,7 +1,7 @@
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(8,INPUT);
   pinMode(9,INPUT);
   pinMode(10,INPUT);
@@ -19,8 +19,13 @@ void loop()
     if(b>63) b=63;
     if(b<0) b=0;
     b = b | (i<<6);
-    Serial.write((char)b);
-    delay(100);
+    //Serial.write((char)b);
+    Serial.print("player ");
+    Serial.print(i); 
+    Serial.print("= ");
+    Serial.print(b);
+    Serial.print('\n');
+    delay(10);
   }
 }
 

@@ -34,7 +34,7 @@ public class SerialHolder : MonoBehaviour
         int.TryParse(sr.ReadLine(), out port);
         ComPort = "COM" + port;
         Debug.Log(ComPort);
-		serPort = new SerialPort(ComPort, 9600);
+		serPort = new SerialPort(ComPort, 115200);
 
         //tests if the serial port can be connected to
         try
@@ -58,6 +58,29 @@ public class SerialHolder : MonoBehaviour
 			int player = b >> 6;
 			angle [player] = (63 - a) * 3.0f;
 			Debug.Log("Player"+player+"   "+a);
+            Debug.Log(GetIntBinaryString(b));
 		}
 	}
+
+    static string GetIntBinaryString(int n)
+    {
+        char[] b = new char[32];
+        int pos = 31;
+        int i = 0;
+
+        while (i < 32)
+        {
+            if ((n & (1 << i)) != 0)
+            {
+                b[pos] = '1';
+            }
+            else
+            {
+                b[pos] = '0';
+            }
+            pos--;
+            i++;
+        }
+        return new string(b);
+    }
 }

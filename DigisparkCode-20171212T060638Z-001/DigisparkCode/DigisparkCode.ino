@@ -1,4 +1,4 @@
-const int xPin = 1; //P2
+  const int xPin = 1; //P2
 const int analogOutPin = 1; //PWM, P1
 
 int x;
