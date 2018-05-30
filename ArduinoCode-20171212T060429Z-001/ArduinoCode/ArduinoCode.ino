@@ -19,12 +19,12 @@ void loop()
     if(b>63) b=63;
     if(b<0) b=0;
     b = b | (i<<6);
-    //Serial.write((char)b);
-    Serial.print("player ");
-    Serial.print(i); 
-    Serial.print("= ");
-    Serial.print(b);
-    Serial.print('\n');
+    Serial.write((char)b);
+    //Serial.print("player ");
+    //Serial.print(i); 
+    //Serial.print("= ");
+    //Serial.print(b);
+    //Serial.print('\n');
     delay(10);
   }
 }

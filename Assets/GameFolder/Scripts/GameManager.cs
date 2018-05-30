@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         uiManager.recipeNameText.text = currentRecipe.recipeName;
 
         //resets all bottles to be false
-        ResetDrinks(true);
+        ResetDrinks();
 
         //TODO: Update the amount of each ingredients here in the UI
     }
@@ -170,19 +170,16 @@ public class GameManager : MonoBehaviour
         }
 
         //TODO: Update how the score is being calculated here
-       // score.SetRecipes(mixedRecipes, currentRecipe);
+        score.SetRecipes(mixedRecipes, currentRecipe);
         
     }
 
-    public void ResetDrinks(bool reset)
+    public void ResetDrinks()
     {
-        if (reset)
+        for (int i = 0; i < bottles.Length; i++)
         {
-            for (int i = 0; i < bottles.Length; i++)
-            {
-                bottles[i].currentContent.amountRequired = 0.0f;
-            }
-            reset = false;
+            bottles[i].currentContent.amountRequired = 0.0f;
+            uiManager.ingredientsText[i].text = currentRecipe.ingredients[i].amountRequired.ToString() + " part    " + currentRecipe.ingredients[i].mixerName;
         }
     }
 }

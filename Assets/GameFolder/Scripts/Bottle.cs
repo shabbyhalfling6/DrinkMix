@@ -10,13 +10,16 @@ public class Bottle : MonoBehaviour
     public float maxPourAngle = 160.0f;
 
     private float currentAngle = 0.0f;
-    public float pourAmount = 1.0f;
 
     public Mixers currentContent;
+    public string ingredientName;
+
 	public int id = 0;
 
     void Start()
     {
+        // Set this bottles ingredient name when the game starts. Will be the same the whole game
+        currentContent.mixerName = ingredientName;
         // Set this bottle scipt to be disabled at the start of the game until the bottle has been picked up
         this.enabled = false;
     }
@@ -67,32 +70,6 @@ public class Bottle : MonoBehaviour
 
     public void Pour()
     {
-        //pour the amount of liquid based on the current tilt angle
-        //get the scaled angle between the max and min pour angles
-        float scaledPourAngle = (currentAngle - minPourAngle) / (maxPourAngle - minPourAngle);
-
-        //get the scaled current amount of liquid leaving the bottle based on the scaled pour angle
-        float scaledPourAmount = scaledPourAngle * pourAmount;
-
-        //divide that amount by 0.02 so it's a per frame amount
-        scaledPourAmount = scaledPourAmount * 0.02f;
-
-        // NOTE: there's probably a better way to do this
-        currentContent.amountRequired += scaledPourAmount;
-
-        // ...and this
-        for(int i = 0; i < UIManager.Instance().drinkNames.Length; i++)
-        {
-            if(this.currentContent.mixerName == UIManager.Instance().drinkNames[i])
-            {
-                for (int j = 0; j < GameManager.Instance().currentRecipe.ingredients.Length; j++)
-                {
-                    if (this.currentContent.mixerName == GameManager.Instance().currentRecipe.ingredients[j].mixerName)
-                    {
-                        UIManager.Instance().percentages[i].text = ((int)(currentContent.amountRequired / GameManager.Instance().currentRecipe.ingredients[j].amountRequired * 100)).ToString() + "  Percent of.." ;
-                    }
-                }
-            }
-        }
+        currentContent.amountRequired += Time.deltaTime;
     }
 }

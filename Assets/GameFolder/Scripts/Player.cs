@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
 
         if(Input.GetMouseButtonDown(1))
         {
-            GameManager.Instance().ResetDrinks(true);
+            GameManager.Instance().ResetDrinks();
         }
 
         if(finishedPlaying)

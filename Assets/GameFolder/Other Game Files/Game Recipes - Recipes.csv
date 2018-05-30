@@ -1,7 +1,7 @@
-Martini,0,0,0,0
-Margarita,0,0,0,0
-Mojito,0,0,0,0
-Old Fashioned,0,0,0,0
-Daiquiri,0,0,0,0
-Pina Colada,0,0,0,0
-Cosmopolitan,0,0,0,0
+Martini,1,2,3,4
+Margarita,4,3,2,1
+Mojito,4,3,1,2
+Old Fashioned,3,4,2,1
+Daiquiri,2,1,3,4
+Pina Colada,4,2,3,1
+Cosmopolitan,1,3,4,2
