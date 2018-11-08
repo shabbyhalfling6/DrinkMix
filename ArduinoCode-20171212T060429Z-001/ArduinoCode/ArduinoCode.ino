@@ -10,22 +10,26 @@ void setup()
 
 void loop()
 {
+  //delay(200);
   int t;
   static float v[4]={0};
+  static int x[4] ={0};
   for(int i=0; i<4; i++)
   {
-    v[i] = pulseIn(8+i,HIGH,40200)*0.2f+v[i]*0.8f;
+    v[i] = pulseIn(8+i,HIGH)*0.2f+v[i]*0.8f;
     int b = map(v[i],1000,1300,0,63);
     if(b>63) b=63;
     if(b<0) b=0;
+    
     b = b | (i<<6);
     Serial.write((char)b);
-    //Serial.print("player ");
+    
+   // Serial.print("player ");
     //Serial.print(i); 
     //Serial.print("= ");
     //Serial.print(b);
     //Serial.print('\n');
-    delay(10);
+    delay(20);
   }
 }
 

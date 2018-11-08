@@ -219,7 +219,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   ingredientName: Rum
-  id: 0
+  id: 2
 --- !u!1001 &180459297
 Prefab:
   m_ObjectHideFlags: 0
@@ -1270,7 +1270,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   ingredientName: Vodka
-  id: 0
+  id: 1
 --- !u!1 &960362249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1471,7 @@ MonoBehaviour:
   minPourAngle: 70
   maxPourAngle: 160
   ingredientName: Gin
-  id: 0
+  id: 2
 --- !u!1001 &1033946073
 Prefab:
   m_ObjectHideFlags: 0

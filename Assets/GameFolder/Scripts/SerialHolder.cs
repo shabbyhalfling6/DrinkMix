@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
+using System.Threading;
 using System;
 
 public class SerialHolder : MonoBehaviour
@@ -35,6 +36,7 @@ public class SerialHolder : MonoBehaviour
         ComPort = "COM" + port;
         Debug.Log(ComPort);
 		serPort = new SerialPort(ComPort, 115200);
+        serPort.Close();
 
         //tests if the serial port can be connected to
         try
@@ -54,7 +56,8 @@ public class SerialHolder : MonoBehaviour
 		{
 			int b;
 			b = serPort.ReadByte();
-			int a = b & 63;
+            serPort.ReadTimeout = 25;
+            int a = b & 63;
 			int player = b >> 6;
 			angle [player] = (63 - a) * 3.0f;
 			Debug.Log("Player"+player+"   "+a);
@@ -82,5 +85,10 @@ public class SerialHolder : MonoBehaviour
             i++;
         }
         return new string(b);
+    }
+
+    private void OnApplicationQuit()
+    {
+        serPort.Close();
     }
 }
